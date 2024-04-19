@@ -1,0 +1,24 @@
+.div_border{  
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
+.input{
+    height: 28px;
+    width: 60%;
+    margin: 10px;
+} 
+table {
+    width: 100% ;
+    border: 1px solid black;
+    }
+  
+  .color-red {
+    background: red;
+    color: white;
+  }  
+  .color-blue {
+    background: rgb(0, 132, 184);
+    color: white;
+    height: auto;
+  }  
