@@ -1,9 +1,10 @@
 
-import { createTheme } from '@mui/material'
 import './App.css'
 import { ThemeProvider } from '@emotion/react'
 import Login from './page/Login/Login'
 import ContenedorLogin from './page/Login/components/ContenedorLogin'
+import Home from './Home'
+import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
 
@@ -26,11 +27,12 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div> */}
-      <ThemeProvider theme={theme} >
-        <div></div>
-      </ThemeProvider>
-
-      <ContenedorLogin/>
+      <main>
+          <Switch>
+            <Route path="/" Component={ContenedorLogin} />
+            <Route path="/home" Component={Home} />
+          </Switch>
+       </main>
       <br/>
     </>
   )

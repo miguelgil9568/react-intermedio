@@ -1,16 +1,16 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react'
 import FormLogin from './FormLogin'
+import logo from '../../../assets/logo.png'
 
 const ContenedorLogin = () => {
   return (
     
 
     <Card>
-      <CardActionArea>
         <CardMedia
-        
-          image=".."
+          sx={{height: 500, justifyItems: 'center'}}
+          image={logo}
           title="Contemplative Reptile"
         />
         <CardContent>
@@ -21,7 +21,6 @@ const ContenedorLogin = () => {
 
           
         </CardContent>
-      </CardActionArea>
       {/* <CardActions>
         <Button size="small" color="primary">
           Share

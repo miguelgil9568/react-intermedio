@@ -41,9 +41,7 @@ const FormLogin = () => {
                 autoComplete="current-password"
                 variant="filled"
                 />
-        <Button variant="contained" color="primary" onClick={()=>{
-            // handleSubmit(e);
-        }}>
+        <Button variant="contained" color="primary" style={{padding: 10, margin: 8}}>
         Iniciar Sesion
         </Button>
   </>
