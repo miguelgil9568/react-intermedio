@@ -3,19 +3,19 @@ import './App.css'
 import { ThemeProvider } from '@emotion/react'
 import Login from './page/Login/Login'
 import ContenedorLogin from './page/Login/components/ContenedorLogin'
-import Home from './Home'
+import Home from './Home';
 import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
 
-  const theme = createTheme({
-    palette:{
-      main: '#ff4400'
-    },
-    secondary: {
-      main: '#f50057'
-    }
-  })
+  // const theme = createTheme({
+  //   palette:{
+  //     main: '#ff4400'
+  //   },
+  //   secondary: {
+  //     main: '#f50057'
+  //   }
+  // })
   
   return (
     <>
@@ -27,12 +27,15 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div> */}
-      <main>
+      {/* <main>
           <Switch>
             <Route path="/" Component={ContenedorLogin} />
             <Route path="/home" Component={Home} />
           </Switch>
-       </main>
+       </main> */}
+       
+      <Home></Home>
+      {/* <ContenedorLogin ></ContenedorLogin> */}
       <br/>
     </>
   )
