@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode development",
+    "prod": "vite --mode prod",
     "build": "tsc && vite build",
+    "build-d": "tsc && vite build --mode development",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -15,6 +17,9 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.17",
     "@mui/material": "^5.15.17",
+    "action": "^0.0.1",
+    "axion": "^0.1.0",
+    "axios": "^1.6.8",
     "formik": "^2.4.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
