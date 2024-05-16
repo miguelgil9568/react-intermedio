@@ -41,12 +41,12 @@ export default function CrCard({item}: IProps) {
 
   return (
     <>
-    <Card sx={{ maxWidth: 345 , margin: '30px'}}>
+    <Card sx={{ maxWidth: 300 , margin: '30px', justifyContent: 'center'}}>
         <Stack spacing={2} m={2}>
         <CrChip></CrChip>
         </Stack>
         <CardMedia
-            sx={{ height: 500 }}
+            sx={{ height: 200  }}
             component={"img"}
             image={item.image}
             title="green iguana"

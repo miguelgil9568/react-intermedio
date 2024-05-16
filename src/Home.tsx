@@ -31,10 +31,11 @@ const Home = () => {
       <CrNavBar/>
       <Box sx={{
         display: 'flex',
-        marginTop: 10,
-        gap: 2,
-        flexWrap: 'wrap'
-
+        marginTop: 4,
+        gap: 0,
+        flexWrap: 'wrap',
+        paddingInline: '4rem',
+        justifyContent: 'center'
       }}>
         {state.data.map((item: any) => (
           <CrCard item={item}/>
