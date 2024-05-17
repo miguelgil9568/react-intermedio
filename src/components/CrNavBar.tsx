@@ -16,7 +16,7 @@ import logo from '../assets/logo-3.png'
 import { CardMedia, ThemeProvider, createTheme } from '@mui/material';
 import { darkTheme } from '../styles/darkTheme';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['¿Quienes somos?', 'Contactenos', 'Dejanos tu opinión'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function CrNavBar() {

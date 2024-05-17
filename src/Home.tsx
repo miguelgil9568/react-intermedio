@@ -49,7 +49,7 @@ const Home = () => {
           marginTop: 4,
           gap: 0,
           flexWrap: 'wrap',
-          paddingInline: '4rem',
+          paddingInline: '7%',
           justifyContent: 'center'
         }}>
           {state.data.map((item: any) => (
