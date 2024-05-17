@@ -39,7 +39,7 @@ const FormLogin = () => {
                 label="Password"
                 type="password"
                 autoComplete="current-password"
-                variant="filled"
+                variant="outlined"
                 />
         <Button variant="contained" color="primary" style={{padding: 10, margin: 8}}>
         Iniciar Sesion

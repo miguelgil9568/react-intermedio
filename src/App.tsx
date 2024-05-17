@@ -13,26 +13,20 @@ import {
 } from "react-router-dom"; 
 import Rutas from './router/Rutas';
 import { createTheme } from '@mui/material';
+import { darkTheme } from './styles/darkTheme';
+import { theme } from './styles/theme';
 
 
 function App() {
 
   
-  const theme = createTheme({
-    palette:{
-      main: '#ff4400'
-    },
-    secondary: {
-      main: '#f50057'
-    }
-  })
-  
+ 
   return (
-          <ThemeProvider theme={theme}>
+          // <ThemeProvider theme={theme}>
             <Router >
               <Rutas />
             </Router>
-          </ThemeProvider>
+          //  </ThemeProvider>
   )
 }
 

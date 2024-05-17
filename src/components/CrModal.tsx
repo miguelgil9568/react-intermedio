@@ -17,7 +17,7 @@ import CrBtnAccion from './CrBtnAccion';
 import { Product } from '../types/Product';
 
 interface IProps {
-    item: Product,
+    item: any,
     open: boolean, 
     setValor : () => void,
     handleClose : () => void,

@@ -22,7 +22,7 @@ interface IProps {
 export default function CrCard({item}: IProps) {
     let [isCheck,setValor] = useState(false);
     
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
 
     const handleCheck = () =>{

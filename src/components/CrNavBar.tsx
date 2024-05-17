@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import logo from '../assets/logo-3.png'
 import { CardMedia, ThemeProvider, createTheme } from '@mui/material';
+import { darkTheme } from '../styles/darkTheme';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -38,14 +39,7 @@ function CrNavBar() {
   };
 
 
-  const darkTheme = createTheme({
-    palette: {
-      mode: 'dark',
-      primary: {
-        main: '#000000',
-      },
-    },
-  });
+
 
   return (
     <ThemeProvider theme={darkTheme}>

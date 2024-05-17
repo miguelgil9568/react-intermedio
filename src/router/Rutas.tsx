@@ -13,7 +13,7 @@ import Home from '../Home';
 const Rutas = () => {
   return (
     <Switch>
-        <Route path="/">
+        <Route exact path="/">
             <Home/>
         </Route>
         <Route path="/login">
@@ -21,6 +21,9 @@ const Rutas = () => {
         </Route>
         <Route path="/detalle">
             <DetalleProducto />
+        </Route>
+        <Route path="*">
+            <h1>404</h1>
         </Route>
   </Switch>
   )
