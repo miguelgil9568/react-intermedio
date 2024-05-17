@@ -7,14 +7,25 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import Card from '@mui/joy/Card';
+import CardContent from '@mui/joy/CardContent';
+import IconButton from '@mui/joy/IconButton';
+import Typography from '@mui/joy/Typography';
+import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
+import AspectRatio from '@mui/joy/AspectRatio';
+import CrBtnAccion from './CrBtnAccion';
+import { Product } from '../types/Product';
 
 interface IProps {
+    item: Product,
     open: boolean, 
+    setValor : () => void,
     handleClose : () => void,
-    handleClickOpen : () => void
+    handleClickOpen : () => void,
+    isCheck:boolean
 }
 
-export default function CrModal( {open, handleClickOpen, handleClose}:IProps) {
+export default function CrModal( {item, open,setValor,  handleClickOpen, handleClose, isCheck}:IProps) {
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -29,23 +40,54 @@ export default function CrModal( {open, handleClickOpen, handleClose}:IProps) {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Disagree
-          </Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
+
+        <Card sx={{ width: 500 }}>
+            <div>
+                <Typography level="title-lg">{item.title}</Typography>
+                <Typography level="body-sm">{item.description}</Typography>
+                <div style={{ position: 'absolute', top: '0.875rem', right: '0.5rem' }} >
+                    <CrBtnAccion isShow={false} setValor={setValor} isCheck={isCheck}></CrBtnAccion>
+                </div>
+            </div>
+            <AspectRatio minHeight="500px"  maxHeight="1000px">
+                <img
+                src={item.image}
+                srcSet={item.image}
+                loading="lazy"
+                alt=""
+                />
+            </AspectRatio>
+
+            {/* <ImageList sx={{ width: 500, height: 450 }} variant="woven" cols={3} gap={8}>
+                
+                <ImageListItem key={item.image}>
+                <img
+                    srcSet={`${item.image}?w=161&fit=crop&auto=format&dpr=2 2x`}
+                    src={`${item.img}?w=161&fit=crop&auto=format`}
+                    alt={item.title}
+                    loading="lazy"
+                />
+                </ImageListItem>
+             </ImageList> */}
+            <CardContent orientation="horizontal">
+                <div>
+                <Typography level="body-xs">Precio Total:</Typography>
+                <Typography fontSize="lg" fontWeight="lg">
+                    ${item.price}
+                </Typography>
+                </div>
+                <Button
+                variant="solid"
+                size="md"
+                color="primary"
+                aria-label="Explore Bahamas Islands"
+                sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
+                >
+                Agregar al carrito
+                </Button>
+            </CardContent>
+        </Card>
+        
       </Dialog>
     </React.Fragment>
   );

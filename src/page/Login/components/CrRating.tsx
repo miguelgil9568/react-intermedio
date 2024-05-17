@@ -46,14 +46,21 @@ function IconContainer(props: IconContainerProps) {
   return <span {...other}>{customIcons[value].icon}</span>;
 }
 
-export default function CrRating() {
-  return (
-    <StyledRating
+interface IProps{
+    isCarita: boolean,
+    value: number
+}
+
+export default function CrRating({isCarita, value}:IProps) {
+  return <>
+    {isCarita ? 
+    (<StyledRating
       name="highlight-selected-only"
       defaultValue={2}
       IconContainerComponent={IconContainer}
       getLabelText={(value: number) => customIcons[value].label}
       highlightSelectedOnly
-    />
-  );
+    />): (<Rating name="size-large" defaultValue={value} precision={0.5} size="large" />
+    )}
+  </>
 }

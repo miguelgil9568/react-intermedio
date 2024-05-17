@@ -13,9 +13,10 @@ import { LibraryAdd } from '@mui/icons-material';
 import CrBtnAccion from './CrBtnAccion';
 import { useState } from 'react';
 import CrModal from './CrModal';
+import { Product } from '../types/Product';
 
 interface IProps {
-    item: any
+    item: Product
 }
 
 export default function CrCard({item}: IProps) {
@@ -41,7 +42,7 @@ export default function CrCard({item}: IProps) {
 
   return (
     <>
-    <Card sx={{ maxWidth: 300 , margin: '30px', justifyContent: 'center'}}>
+    <Card sx={{ maxWidth: 350 , width: 300 , margin: '15px', justifyContent: 'center'}} onClick={handleClickOpen} > 
         <Stack spacing={2} m={2}>
         <CrChip></CrChip>
         </Stack>
@@ -58,27 +59,24 @@ export default function CrCard({item}: IProps) {
             alt='green iguana'
         />
         <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-            {item.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-            {item.description}
+            <Typography gutterBottom variant="h5" component="div" sx={{height: '100px'}}>
+                {item.title}
             </Typography>
         </CardContent>
-            <Box sx={{margin: '30px'}}>
-                <CrRating  ></CrRating>
-            </Box>
         <CardActions 
         sx={{
             display: 'flex',
             justifyContent: 'space-between'
         }}>
-            <CrBtnAccion isCheck={open} setValor={handleClickOpen} isShow={true}/>
+            <Box sx={{margin: '10px'}}>
+                <CrRating  isCarita={false} value={item.rating.rate}></CrRating>
+            </Box>
+            {/* <CrBtnAccion isCheck={open} setValor={handleClickOpen} isShow={true}/> */}
             <CrBtnAccion isCheck={isCheck} setValor={handleCheck} isShow={false}/>
         </CardActions>
     </Card>
 
-    <CrModal open={open} handleClickOpen={handleClickOpen} handleClose={handleClose} ></CrModal>
+    <CrModal item={item} open={open} handleClickOpen={handleClickOpen} handleClose={handleClose} isCheck={isCheck} setValor={handleCheck} ></CrModal>
     </>
   );
 }

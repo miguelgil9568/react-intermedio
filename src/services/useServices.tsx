@@ -1,8 +1,9 @@
 import React, { useReducer, useState } from 'react'
 import AxiosClient from './clients/AxiosClient'
+import { Product } from '../types/Product'
 
 interface IState {
-    data: any,
+    data: Product[],
     loading: boolean,
     error: null
 }
