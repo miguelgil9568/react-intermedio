@@ -15,6 +15,9 @@ import Rutas from './router/Rutas';
 import { createTheme } from '@mui/material';
 import { darkTheme } from './styles/darkTheme';
 import { theme } from './styles/theme';
+import { Provider} from 'react-redux';
+import { store } from './store/redux';
+
 
 
 function App() {
@@ -24,7 +27,9 @@ function App() {
   return (
           // <ThemeProvider theme={theme}>
             <Router >
-              <Rutas />
+              <Provider store={store}>
+                <Rutas />
+              </Provider>
             </Router>
           //  </ThemeProvider>
   )

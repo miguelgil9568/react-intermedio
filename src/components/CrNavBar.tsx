@@ -46,14 +46,7 @@ function CrNavBar() {
       <AppBar position="static" color="primary" > 
         <Container maxWidth="xl" >
           <Toolbar disableGutters >
-              <CardMedia component={"img"}
-              style={{
-                width: '50 px'
-              }}
-              sx={{width: 70 ,display: { xs: 'none', md: 'flex' }, mr: 1 }}
-              image={logo}
-              title="Contemplative Reptile"
-              />
+              
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
@@ -90,7 +83,14 @@ function CrNavBar() {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+              <CardMedia component={"img"}
+                style={{
+                  width: '50 px'
+                }}
+                sx={{width: 70 ,display: { xs: 'flex', md: 'flex' }, mr: 1 }}
+                image={logo}
+                title="Contemplative Reptile"
+                />
             <Typography
               variant="h5"
               noWrap
@@ -107,7 +107,7 @@ function CrNavBar() {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              MUNDO ANIMAL
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (

@@ -77,7 +77,7 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
                 </Typography>
                 </div>
                 <Button
-                variant="solid"
+                
                 size="md"
                 color="primary"
                 aria-label="Explore Bahamas Islands"

@@ -5,11 +5,16 @@ import { Alert, Box } from '@mui/material'
 import useServices from './services/useServices'
 import CrSpinner from './components/CrSpinner'
 import { Product } from './types/Product'
+import { useSelector } from 'react-redux'
 
 
 
 const Home = () => { 
   
+  const stateRedux = useSelector((state) => state);
+
+  console.log('carrito '+ stateRedux.carrito)
+
   const {
     // data, 
     // error, 
