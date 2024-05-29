@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
 interface IProps{
     isCheck: boolean,
@@ -23,8 +25,8 @@ const CrBtnAccion = ({isCheck,setValor, isShow}:IProps) => {
             </IconButton>):
             (
             <IconButton onClick={setValor}>
-                {isCheck ? <LibraryAddCheckIcon color='success' />:
-                <LibraryAddIcon color='primary' />  
+                {isCheck ? <RemoveShoppingCartIcon color='success' />:
+                <ShoppingCartCheckoutIcon color='primary' />  
                 }
             </IconButton>
             )

@@ -18,12 +18,12 @@ import { Product } from '../types/Product';
 interface IProps {
     item: Product,
     add: (item: Product) => void,
-    
-    remove: (id: number) => void
+    remove: (id: number) => void,
+    ischeck:  boolean
 }
 
-export default function CrCard({item, add, remove}: IProps) {
-    let [isCheck,setValor] = useState(false);
+export default function CrCard({item, add, remove,ischeck }: IProps) {
+    let [isCheck,setValor] = useState(ischeck);
     
     const [open, setOpen] = useState(false);
 
@@ -68,7 +68,7 @@ export default function CrCard({item, add, remove}: IProps) {
             alt='green iguana'
         />
         <CardContent onClick={handleClickOpen} >
-            <Typography gutterBottom variant="h5" component="div" sx={{height: '100px'}}>
+            <Typography gutterBottom variant="h5" component="div" sx={{height: '100px' }} className='module line-clamp'>
                 {item.title}
             </Typography>
         </CardContent>

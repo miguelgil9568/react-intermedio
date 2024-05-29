@@ -12,14 +12,22 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import logo from '../assets/logo-3.png'
-import { CardMedia, ThemeProvider, createTheme } from '@mui/material';
+import { Badge, CardMedia, ThemeProvider, createTheme } from '@mui/material';
 import { darkTheme } from '../styles/darkTheme';
+import { AccountCircle } from '@mui/icons-material';
+import { useAppSelector } from '../hooks/store';
+import CrModalCarrito from './CrModalCarrito';
 
 const pages = ['¿Quienes somos?', 'Contactenos', 'Dejanos tu opinión'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function CrNavBar() {
+
+  const carrito = useAppSelector((state) => state);
+  console.log('carrito '+ JSON.stringify(carrito));
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -38,6 +46,16 @@ function CrNavBar() {
     setAnchorElUser(null);
   };
 
+  const [anchorElCarrito, setAnchorElCarrito] = React.useState<null | HTMLElement>(null);
+
+  const handleOpenNavCarrito = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElCarrito(event.currentTarget);
+  };
+
+  const handleCloseNavCarrito = () => {
+    setAnchorElCarrito(null);
+  };
+
 
 
 
@@ -46,6 +64,7 @@ function CrNavBar() {
       <AppBar position="static" color="primary" > 
         <Container maxWidth="xl" >
           <Toolbar disableGutters >
+            
               
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -120,7 +139,40 @@ function CrNavBar() {
                 </Button>
               ))}
             </Box>
-
+            <Box sx={{ display: { xs: 'none', md: 'flex' } , padding: '1rem'}}>
+              <IconButton size="large" aria-label="show 4 new mails" onClick={handleOpenNavCarrito} color="inherit">
+                <Badge badgeContent={carrito.carrito.length} color="error">
+                  <ShoppingCartIcon></ShoppingCartIcon>
+                </Badge>
+              </IconButton>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElCarrito}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElCarrito)}
+                onClose={handleCloseNavCarrito}
+                >
+                <CrModalCarrito items={carrito.carrito}></CrModalCarrito>
+              </Menu>
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit">
+                <Badge badgeContent={15} color="error">
+                  <MarkUnreadChatAltIcon />
+                </Badge>
+              </IconButton>
+              
+            </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
