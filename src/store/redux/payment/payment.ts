@@ -4,7 +4,7 @@ import { Product } from "../../../types/Product";
 const initialState: Product[] = [];
 
 export const usePaymentSlice = createSlice({
-    name: "carrito",
+    name: "payment",
     initialState ,
     reducers: {
         addProduct: (state, action: PayloadAction<Product>) => {

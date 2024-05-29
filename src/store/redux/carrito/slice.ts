@@ -1,7 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Product } from "../../../types/Product";
 
-const initialState: Product[] = [];
+const DEFAULTState: Product[] = [];
+
+const initialState: Product[] = (()=>{
+    const persistencia = localStorage.getItem("_redux_state_");
+    console.log(persistencia);
+    return persistencia ? JSON.parse(persistencia).carrito : DEFAULTState;
+})();
 
 export const useCarritoSlice = createSlice({
     name: "carrito",
@@ -16,4 +22,5 @@ export const useCarritoSlice = createSlice({
     }
 });
 
+export const {addProduct, removeProduct} = useCarritoSlice.actions;
 export default useCarritoSlice.reducer;

@@ -16,10 +16,13 @@ import CrModal from './CrModal';
 import { Product } from '../types/Product';
 
 interface IProps {
-    item: Product
+    item: Product,
+    add: (item: Product) => void,
+    
+    remove: (id: number) => void
 }
 
-export default function CrCard({item}: IProps) {
+export default function CrCard({item, add, remove}: IProps) {
     let [isCheck,setValor] = useState(false);
     
     const [open, setOpen] = useState(false);
@@ -27,7 +30,13 @@ export default function CrCard({item}: IProps) {
 
     const handleCheck = () =>{
       console.log('handleCheck');
-      setValor(!isCheck);
+      if(!isCheck){
+        setValor(!isCheck);
+        add(item);
+      }else {
+        setValor(!isCheck);
+        remove(item.id);
+      }
     }
 
     const handleClickOpen = () => {
@@ -42,11 +51,11 @@ export default function CrCard({item}: IProps) {
 
   return (
     <>
-    <Card sx={{ maxWidth: 350 , width: 300 , margin: '15px', justifyContent: 'center'}} onClick={handleClickOpen} > 
+    <Card sx={{ maxWidth: 350 , width: 300 , margin: '15px', justifyContent: 'center'}} > 
         <Stack spacing={2} m={2}>
         <CrChip></CrChip>
         </Stack>
-        <CardMedia
+        <CardMedia onClick={handleClickOpen} 
             sx={{ height: 200  }}
             component={"img"}
             image={item.image}
@@ -58,7 +67,7 @@ export default function CrCard({item}: IProps) {
             }}
             alt='green iguana'
         />
-        <CardContent>
+        <CardContent onClick={handleClickOpen} >
             <Typography gutterBottom variant="h5" component="div" sx={{height: '100px'}}>
                 {item.title}
             </Typography>

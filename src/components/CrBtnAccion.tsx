@@ -17,13 +17,15 @@ const CrBtnAccion = ({isCheck,setValor, isShow}:IProps) => {
     <div>
         {isShow ? (
              <IconButton onClick={setValor}>
-                {isCheck ? <RemoveRedEyeIcon color='primary' /> : 
-                <RemoveRedEyeIcon color='success' />}
+                {isCheck ? <RemoveRedEyeIcon color='success' />:
+                <RemoveRedEyeIcon color='primary' />  
+                }
             </IconButton>):
             (
             <IconButton onClick={setValor}>
-                {isCheck ? <LibraryAddIcon color='primary' /> : 
-                <LibraryAddCheckIcon color='success' />}
+                {isCheck ? <LibraryAddCheckIcon color='success' />:
+                <LibraryAddIcon color='primary' />  
+                }
             </IconButton>
             )
              }

@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import CrNavBar from './components/CrNavBar'
 import CrCard from './components/CrCard'
-import { Alert, Box } from '@mui/material'
+import {  Box } from '@mui/material'
 import useServices from './services/useServices'
-import CrSpinner from './components/CrSpinner'
 import { Product } from './types/Product'
-import { useSelector } from 'react-redux'
-
-
+import { addProduct, removeProduct } from './store/redux/carrito/slice'
+import { useAppSelector, useAppDispatch } from './hooks/store'
 
 const Home = () => { 
-  
-  const stateRedux = useSelector((state) => state);
 
-  console.log('carrito '+ stateRedux.carrito)
+  const carrito = useAppSelector((state) => state);
+  console.log('carrito '+ carrito);
+
+  const dispatch = useAppDispatch();
 
   const {
     // data, 
@@ -34,6 +33,14 @@ const Home = () => {
     setLoading(state.loading);
     //handleFetchxId(1);
   },[])
+
+  const handleAdd = (item: Product ) =>{
+    dispatch(addProduct(item));
+  }
+
+  const handleRemove = (id: number ) =>{
+    dispatch(removeProduct(id));
+  }
 
   console.log(state.data);
   console.log(state.loading);
@@ -58,7 +65,7 @@ const Home = () => {
           justifyContent: 'center'
         }}>
           {state.data.map((item: any) => (
-            <CrCard item={item}/>
+            <CrCard item={item} add={handleAdd} remove={handleRemove}/>
           ))}
         </Box>
         
