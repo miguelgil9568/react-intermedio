@@ -1,10 +1,8 @@
 
-import React from 'react'
+
 import {
-    BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
   } from "react-router-dom"; 
 import ContenedorLogin from '../page/Login/components/ContenedorLogin';
 import DetalleProducto from '../components/DetalleProducto';

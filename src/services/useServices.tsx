@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react'
+import  {  useReducer } from 'react'
 import AxiosClient from './clients/AxiosClient'
 import { Product } from '../types/Product'
 
@@ -14,8 +14,12 @@ export const initialState: IState = {
     error: null
 }
 
+type IAction = | { type: 'LOADING', payload: true} |
+{type: 'DATA', payload: Product[]} |
+{type: 'ERROR', payload: any} |
+{type: 'LOADING', payload: false }
 
-const reducer = (state : IState, action : any) => {
+const reducer = (state : IState, action : IAction): IState => {
     switch(action.type){
         case 'LOADING': 
          return {
@@ -36,7 +40,7 @@ const reducer = (state : IState, action : any) => {
 }
 
 const useServices = () => {
-    const [state, dispatch] = useReducer(reducer, initialState )
+    const [state, dispatch] = useReducer(reducer, initialState );
 
     const handleFetch = async () => {
         dispatch({type: 'LOADING', payload: true});

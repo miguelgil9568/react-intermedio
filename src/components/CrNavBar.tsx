@@ -11,13 +11,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import logo from '../assets/logo-3.png'
-import { Badge, CardMedia, ThemeProvider, createTheme } from '@mui/material';
+import { Badge, CardMedia, ThemeProvider } from '@mui/material';
 import { darkTheme } from '../styles/darkTheme';
-import { AccountCircle } from '@mui/icons-material';
 import { useAppSelector } from '../hooks/store';
 import CrModalCarrito from './CrModalCarrito';
 

@@ -1,6 +1,5 @@
-import {configureStore, type Middleware } from "@reduxjs/toolkit"
-import {reducer } from "../../"
-import  useCarritoSlice from "./carrito/slice"
+import {configureStore, type Middleware } from "@reduxjs/toolkit";
+import  useCarritoSlice from "./carrito/slice";
 import  usePaymentSlice  from "./payment/payment";
 
 const persistencia : Middleware = (store) => (next)=> (action) => {

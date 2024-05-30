@@ -8,8 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Product } from '../types/Product';
 import CrBtnAccion from './CrBtnAccion';
-import { useAppDispatch } from '../hooks/store';
-import { addProduct, removeProduct } from '../store/redux/carrito/slice'
+//import { addProduct, removeProduct } from '../store/redux/carrito/slice'
 import { useState } from 'react';
 
 interface IProps {
@@ -19,16 +18,16 @@ interface IProps {
 export default function CrModalCarrito({items}:IProps) {
 
     let [isCheck,setValor] = useState(true);
-    const dispatch = useAppDispatch();
+    //const dispatch = useAppDispatch();
 
     const handleCheck = () =>{
         console.log('handleCheck');
         if(!isCheck){
           setValor(!isCheck);
-          addProduct(item);
+          //addProduct(item);
         }else {
           setValor(!isCheck);
-          removeProduct(item.id);
+          //removeProduct(item.id);
         }
       }
     
