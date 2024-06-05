@@ -1,20 +1,13 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
-import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
 import AspectRatio from '@mui/joy/AspectRatio';
 import CrBtnAccion from './CrBtnAccion';
-import { Product } from '../types/Product';
 
 interface IProps {
     item: any,
@@ -77,7 +70,6 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
                 </Typography>
                 </div>
                 <Button
-                
                 size="md"
                 color="primary"
                 aria-label="Explore Bahamas Islands"
