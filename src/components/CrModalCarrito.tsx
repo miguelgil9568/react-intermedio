@@ -43,10 +43,10 @@ export default function CrModalCarrito({items}:IProps) {
         let precios : number[] = [];
         items.forEach(valor => {
           precios.push(valor.price);
-          setTotal( precios.reduce((accumulator, currentValue) =>{
-            return accumulator + currentValue;
-          }, 0) );   
         })
+        setTotal( precios.reduce((accumulator, currentValue) =>{
+          return accumulator + currentValue;
+        }, 0) );   
       }
 
   return (
@@ -87,7 +87,7 @@ export default function CrModalCarrito({items}:IProps) {
           )
         )
        }
-       <p > Total : ${total} </p>
+       <p style={{    display: 'flex', justifyContent: 'end', paddingInline: '30px'}}> Total : ${total} </p>
       </>
   );
 }
