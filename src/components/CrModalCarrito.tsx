@@ -9,7 +9,8 @@ import Typography from '@mui/material/Typography';
 import { Product } from '../types/Product';
 import CrBtnAccion from './CrBtnAccion';
 //import { addProduct, removeProduct } from '../store/redux/carrito/slice'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { number } from 'yup';
 
 interface IProps {
     items : Product[];
@@ -18,7 +19,13 @@ interface IProps {
 export default function CrModalCarrito({items}:IProps) {
 
     let [isCheck,setValor] = useState(true);
+    let [total,setTotal] = useState(0);
     //const dispatch = useAppDispatch();
+
+    useEffect (()=>{
+        calcularTotal();
+      }, items
+    )
 
     const handleCheck = () =>{
         console.log('handleCheck');
@@ -30,58 +37,57 @@ export default function CrModalCarrito({items}:IProps) {
           //removeProduct(item.id);
         }
       }
-    
+
+
+      const calcularTotal = ( ) =>{
+        let precios : number[] = [];
+        items.forEach(valor => {
+          precios.push(valor.price);
+          setTotal( precios.reduce((accumulator, currentValue) =>{
+            return accumulator + currentValue;
+          }, 0) );   
+        })
+      }
+
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {/* <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Brunch this weekend?"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                Ali Connors
-              </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" /> */}
-      {items.map(item => (
-        <>
-            <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                <Avatar alt="Travis Howard" src={item.image} />
-                </ListItemAvatar>
-                <ListItemText
-                primary={item.title}
-                secondary={
-                    <React.Fragment>
-                    <Typography
-                        sx={{ display: 'inline' }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                    >
-                        
-                    </Typography>
-                        {item.category}
-                    </React.Fragment>
-                }
-                />
-                <CrBtnAccion isCheck={true} isShow={false} setValor={handleCheck}></CrBtnAccion>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            </>
-        ))}
-    </List>
+   <>
+      {  items.length === 0 ? <h2 className=''> Carrito vacio </h2> : items.map(item => (
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+              <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                  <Avatar alt="Travis Howard" src={item.image} />
+                  </ListItemAvatar>
+                  <ListItemText
+                  primary={item.title}
+                  secondary={
+                      <React.Fragment>
+                          <Typography
+                              sx={{  display: 'flex',
+                              justifyContent: 'space-between' }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                              
+                          >
+                            <div>
+                              {item.category}
+                            </div>
+                            <div>
+                            { '$' +  item.price}
+                            </div>
+                          </Typography>
+                      </React.Fragment>
+                  }
+                  
+                  />
+                  <CrBtnAccion isCheck={true} isShow={false} setValor={handleCheck}></CrBtnAccion>
+              </ListItem>
+              <Divider variant="inset" component="li" />
+          </List>
+          )
+        )
+       }
+       <p > Total : ${total} </p>
+      </>
   );
 }

@@ -70,12 +70,13 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
                 </Typography>
                 </div>
                 <Button
+                onClick={setValor}
                 size="md"
                 color="primary"
                 aria-label="Explore Bahamas Islands"
                 sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
                 >
-                Agregar al carrito
+                  { !isCheck ? 'Agregar al carrito' : 'Desagregar del carrito'}
                 </Button>
             </CardContent>
         </Card>
