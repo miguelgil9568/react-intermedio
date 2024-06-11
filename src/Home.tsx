@@ -63,7 +63,7 @@ const Home = () => {
           paddingInline: '7%',
           justifyContent: 'center'
         }}>
-          {data.map((item: any) => (
+          {state.data.map((item: any) => (
             <CrCard item={item} add={handleAdd} remove={handleRemove} ischeck={ carrito.carrito.filter(element => {
               return item.id === element.id;
             }).length > 0 ?  true : false} />

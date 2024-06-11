@@ -51,7 +51,7 @@ export default function CrModalCarrito({items}:IProps) {
 
   return (
    <>
-      {  items.length === 0 ? <h2 className=''> Carrito vacio </h2> : items.map(item => (
+      {  items.length === 0 ? <h2 > Carrito vacio </h2> : items.map(item => (
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
               <ListItem alignItems="flex-start">
                   <ListItemAvatar>
