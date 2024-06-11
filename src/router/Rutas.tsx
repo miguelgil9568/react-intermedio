@@ -7,6 +7,7 @@ import {
 import ContenedorLogin from '../page/Login/components/ContenedorLogin';
 import DetalleProducto from '../components/DetalleProducto';
 import Home from '../Home';
+import CrDatosCompra from "../components/CrDatosCompra";
 
 const Rutas = () => {
   return (
@@ -19,6 +20,9 @@ const Rutas = () => {
         </Route>
         <Route path="/detalle">
             <DetalleProducto />
+        </Route>
+        <Route path="/detalleCompra">
+            <CrDatosCompra />
         </Route>
         <Route path="*">
             <h1>404</h1>

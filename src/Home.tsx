@@ -54,7 +54,6 @@ const Home = () => {
     return (
       <>
         <CrNavBar/>
-        
         {/* <Alert severity="success">This is a success Alert.</Alert> */}
         <Box sx={{
           display: 'flex',
