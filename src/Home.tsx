@@ -6,8 +6,15 @@ import useServices from './services/useServices'
 import { Product } from './types/Product'
 import { addProduct, removeProduct } from './store/redux/carrito/slice'
 import { useAppSelector, useAppDispatch } from './hooks/store'
+import CrSpinner from './components/CrSpinner'
+import { useQuery } from '@tanstack/react-query'
 
 const Home = () => { 
+
+  const query = useQuery({
+       queryKey: ['keyproductos'],
+       queryFn: () => fetch('https://fakestoreapi.com/products').then(res => res.json())
+  });
 
   const carrito = useAppSelector((state) => state);
   console.log('carrito '+ carrito);
@@ -24,7 +31,9 @@ const Home = () => {
   } = useServices();
 
   const [data, setData] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+
+
 
   useEffect(()=>{
     setLoading(true);
@@ -43,17 +52,17 @@ const Home = () => {
   }
 
   console.log(state.data);
-  console.log(state.loading);
+  console.log('loading '+state.loading); 
 
 
-  // if(loading){
-  //   // return ( 
-  //   //         // <CrSpinner isViewer={loading} ></CrSpinner>
-  //   // )
-  // }else {
+  if(loading){
+    return ( 
+            <CrSpinner isViewer={loading} ></CrSpinner>
+    )
+  }
+  
     return (
       <>
-        <CrNavBar/>
         {/* <Alert severity="success">This is a success Alert.</Alert> */}
         <Box sx={{
           display: 'flex',

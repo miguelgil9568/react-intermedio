@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
 import *  as Yup from 'yup'
+import { Box } from '@mui/material'
 
 const validateScheme = Yup.object().shape  ({
     nombre: Yup.string().required('El nombre es requerido'),
@@ -10,8 +11,21 @@ const validateScheme = Yup.object().shape  ({
 })
 
 const CrDatosCompra = () => {
+    
+    const [count, setCount] = useState(0);
+    const [data, setData] = useState([]);
+
+
+
   return (
-    <>
+    <Box sx={{
+        display: 'flex',
+        marginTop: 4,
+        gap: 0,
+        flexWrap: 'wrap',
+        paddingInline: '7%',
+        justifyContent: 'center'
+      }}>
         <Formik 
         initialValues={{
             nombre: '',
@@ -92,7 +106,7 @@ const CrDatosCompra = () => {
 
             )}
         </Formik>
-    </>
+    </Box>
   )
 }
 
