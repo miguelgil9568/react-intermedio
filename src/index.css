@@ -15,7 +15,7 @@
 }
 
 .body {
-  margin: 0;
+  margin: unset;
   display: flex;
   place-items: center;
   min-width: 320px;

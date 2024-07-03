@@ -8,6 +8,34 @@ import { addProduct, removeProduct } from './store/redux/carrito/slice'
 import { useAppSelector, useAppDispatch } from './hooks/store'
 import CrSpinner from './components/CrSpinner'
 import { useQuery } from '@tanstack/react-query'
+import { ApolloClient, HttpLink, InMemoryCache, gql, useLazyQuery } from '@apollo/client'
+
+
+const GET_PRODUCTS = gql `
+  query GetProducts {
+    products {
+      id
+      title
+      price
+      description
+      category
+      image
+    }
+  }
+`;
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'http://localhost:5000/graphql',
+  }),
+}); 
+
+client.query({
+  query: GET_PRODUCTS
+}).then(result => console.log('graphql' + result));
+
+
 
 const Home = () => { 
 
