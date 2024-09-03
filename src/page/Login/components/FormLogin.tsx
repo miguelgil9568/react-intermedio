@@ -41,7 +41,7 @@ const FormLogin = () => {
                 variant="outlined"
                 />
         <Button variant="contained" color="primary" style={{padding: 10, margin: 8}}>
-        Iniciar Sesion
+          Iniciar Sesion
         </Button>
   </>
   )

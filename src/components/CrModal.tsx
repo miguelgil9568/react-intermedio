@@ -6,8 +6,6 @@ import { useTheme } from '@mui/material/styles';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
-import AspectRatio from '@mui/joy/AspectRatio';
-import CrBtnAccion from './CrBtnAccion';
 import { Link } from 'react-router-dom';
 
 interface IProps {

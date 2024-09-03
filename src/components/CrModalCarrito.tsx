@@ -12,14 +12,14 @@ import CrBtnAccion from './CrBtnAccion';
 import { useEffect, useState } from 'react';
 import { number } from 'yup';
 import { Button } from '@mui/base';
-import { Link } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 
 interface IProps {
     items : Product[];
 }
 
 export default function CrModalCarrito({items}:IProps) {
-
+    const history = useHistory();
     let [isCheck,setValor] = useState(true);
     let [total,setTotal] = useState(0);
     //const dispatch = useAppDispatch();
@@ -49,6 +49,10 @@ export default function CrModalCarrito({items}:IProps) {
         setTotal( precios.reduce((accumulator, currentValue) =>{
           return accumulator + currentValue;
         }, 0) );   
+      }
+
+      const irACarrito = () =>{
+        return history.push('/detalleCompra');
       }
 
   return (
@@ -92,11 +96,11 @@ export default function CrModalCarrito({items}:IProps) {
        <ul>
         <p style={{    display: 'flex', justifyContent: 'end', paddingInline: '30px'}}> Total : ${total} </p>
        </ul>
-       <ul style={{display: 'flex', justifyContent: 'end'}}>
-        <button type='button'>
-            <Link to="/detalleCompra">Ir al carrito</Link>
-          </button>
-        </ul>
+       {items.length != 0 ? <div style={{display: 'flex', justifyContent: 'end'}}>
+        <Button  color="primary" style={{width: '100%', marginInline: 20, backgroundColor: 'white'}} onClick={irACarrito}>
+            Ir al carrito
+          </Button>
+        </div>: ''}
         
 
       </>

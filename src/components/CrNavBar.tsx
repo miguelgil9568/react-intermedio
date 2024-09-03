@@ -18,7 +18,7 @@ import { Badge, CardMedia, ThemeProvider } from '@mui/material';
 import { darkTheme } from '../styles/darkTheme';
 import { useAppSelector } from '../hooks/store';
 import CrModalCarrito from './CrModalCarrito';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const pages = ['¿Quienes somos?', 'Contactenos', 'Dejanos tu opinión'];
 const settings = [{title: 'Profile', link: ''}, {title: 'Account', link: ''}, {title: 'Dashboard', link: '/'},
@@ -26,6 +26,7 @@ const settings = [{title: 'Profile', link: ''}, {title: 'Account', link: ''}, {t
 
 function CrNavBar() {
 
+  const history = useHistory();
   const carrito = useAppSelector((state) => state);
   console.log('carrito '+ JSON.stringify(carrito));
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -42,9 +43,13 @@ function CrNavBar() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = ( ) => {
     setAnchorElUser(null);
   };
+
+  const irACarrito = (link: string) =>{
+    return history.push(link);
+  }
 
   const [anchorElCarrito, setAnchorElCarrito] = React.useState<null | HTMLElement>(null);
 
