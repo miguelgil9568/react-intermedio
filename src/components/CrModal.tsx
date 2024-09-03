@@ -8,6 +8,7 @@ import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import AspectRatio from '@mui/joy/AspectRatio';
 import CrBtnAccion from './CrBtnAccion';
+import { Link } from 'react-router-dom';
 
 interface IProps {
     item: any,
@@ -34,22 +35,24 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
         aria-labelledby="responsive-dialog-title"
       >
 
-        <Card sx={{ width: 500 }}>
+        <Card sx={{ width: 500}}>
             <div>
                 <Typography level="title-lg">{item.title}</Typography>
                 <Typography level="body-sm">{item.description}</Typography>
                 <div style={{ position: 'absolute', top: '0.875rem', right: '0.5rem' }} >
-                    <CrBtnAccion isShow={false} setValor={setValor} isCheck={isCheck}></CrBtnAccion>
+                    {/* <CrBtnAccion isShow={false} setValor={setValor} isCheck={isCheck}></CrBtnAccion> */}
                 </div>
             </div>
-            <AspectRatio minHeight="500px"  maxHeight="1000px">
+            <div style={{ justifyContent: 'center' , display: 'flex'}}>
+              
                 <img
                 src={item.image}
                 srcSet={item.image}
                 loading="lazy"
                 alt=""
+                style={{ maxWidth: '250px',maxHeight: '500px'}}
                 />
-            </AspectRatio>
+            </div>
 
             {/* <ImageList sx={{ width: 500, height: 450 }} variant="woven" cols={3} gap={8}>
                 
@@ -76,7 +79,7 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
                 aria-label="Explore Bahamas Islands"
                 sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
                 >
-                  { !isCheck ? 'Agregar al carrito' : 'Desagregar del carrito'}
+                  <Link to="/">{ !isCheck ? 'Agregar al carrito' : 'Desagregar del carrito'}</Link>
                 </Button>
             </CardContent>
         </Card>

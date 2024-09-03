@@ -9,11 +9,14 @@ const ContenedorLogin = () => {
 
       <Card>
           <CardMedia
-            sx={{height: 400, justifyItems: 'center'}}
+            sx={{height: 250, justifyItems: 'center'}}
             image={logo}
             title="Contemplative Reptile"
           />
-          <CardContent>
+          <CardContent sx={{    width: '400px',
+                display: 'flex',
+                gap: '10px',
+                flexDirection: 'column'}}>
             <Typography gutterBottom variant="h5" component="h2">
               Inicio de sesion
             </Typography>
