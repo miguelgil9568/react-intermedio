@@ -11,6 +11,8 @@ import CrBtnAccion from './CrBtnAccion';
 //import { addProduct, removeProduct } from '../store/redux/carrito/slice'
 import { useEffect, useState } from 'react';
 import { number } from 'yup';
+import { Button } from '@mui/base';
+import { Link } from 'react-router-dom';
 
 interface IProps {
     items : Product[];
@@ -87,7 +89,16 @@ export default function CrModalCarrito({items}:IProps) {
           )
         )
        }
-       <p style={{    display: 'flex', justifyContent: 'end', paddingInline: '30px'}}> Total : ${total} </p>
+       <ul>
+        <p style={{    display: 'flex', justifyContent: 'end', paddingInline: '30px'}}> Total : ${total} </p>
+       </ul>
+       <ul style={{display: 'flex', justifyContent: 'end'}}>
+        <button type='button'>
+            <Link to="/detalleCompra">Ir al carrito</Link>
+          </button>
+        </ul>
+        
+
       </>
   );
 }

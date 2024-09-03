@@ -114,3 +114,7 @@
 .formulario input[type="radio"] {
   width: auto;
 }
+
+.span-error {
+  color: red
+}

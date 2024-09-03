@@ -18,9 +18,11 @@ import { Badge, CardMedia, ThemeProvider } from '@mui/material';
 import { darkTheme } from '../styles/darkTheme';
 import { useAppSelector } from '../hooks/store';
 import CrModalCarrito from './CrModalCarrito';
+import { Link, NavLink } from 'react-router-dom';
 
 const pages = ['¿Quienes somos?', 'Contactenos', 'Dejanos tu opinión'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [{title: 'Profile', link: ''}, {title: 'Account', link: ''}, {title: 'Dashboard', link: '/'},
+   {title: 'Logout', link: '/login'}];
 
 function CrNavBar() {
 
@@ -53,7 +55,6 @@ function CrNavBar() {
   const handleCloseNavCarrito = () => {
     setAnchorElCarrito(null);
   };
-
 
 
 
@@ -100,6 +101,7 @@ function CrNavBar() {
                 ))}
               </Menu>
             </Box>
+            <Link to="/">
               <CardMedia component={"img"}
                 style={{
                   width: '50 px'
@@ -108,6 +110,7 @@ function CrNavBar() {
                 image={logo}
                 title="Contemplative Reptile"
                 />
+            
             <Typography
               variant="h5"
               noWrap
@@ -126,6 +129,7 @@ function CrNavBar() {
             >
               MUNDO ANIMAL
             </Typography>
+            </Link>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
                 <Button
@@ -194,8 +198,8 @@ function CrNavBar() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center"><Link to={setting.link}>{setting.title}</Link> </Typography> 
                   </MenuItem>
                 ))}
               </Menu>
