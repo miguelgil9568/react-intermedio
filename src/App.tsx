@@ -10,6 +10,7 @@ import { Provider} from 'react-redux';
 import { store } from './store/redux';
 import CrNavBar from './components/CrNavBar';
 import ContenedorLogin from './page/Login/components/ContenedorLogin';
+import CrBody from './components/CrBody';
 
 
 

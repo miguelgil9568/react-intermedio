@@ -212,7 +212,7 @@ function CrNavBar() {
           </Toolbar>
         </Container>
       </AppBar>
-    </ThemeProvider>
+    </ThemeProvider> 
   );
 }
 export default CrNavBar;

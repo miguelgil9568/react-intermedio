@@ -5,6 +5,7 @@
     description: string;
     category:    string;
     image:       string;
+    quantity:    number | null;
     rating:      Rating;
   }
   

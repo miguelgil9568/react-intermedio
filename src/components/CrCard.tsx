@@ -20,7 +20,6 @@ interface IProps {
 
 export default function CrCard({item, add, remove,ischeck }: IProps) {
     let [isCheck,setValor] = useState(ischeck);
-    
     const [open, setOpen] = useState(false);
 
 
@@ -77,7 +76,9 @@ export default function CrCard({item, add, remove,ischeck }: IProps) {
                 <CrRating  isCarita={false} value={item.rating.rate}></CrRating>
             </Box>
             {/* <CrBtnAccion isCheck={open} setValor={handleClickOpen} isShow={true}/> */}
-            <CrBtnAccion isCheck={isCheck} setValor={handleCheck} isShow={false}/>
+            <CrBtnAccion isCheck={isCheck} setValor={()=> {
+              
+              item.quantity = 1;handleCheck; }} isShow={false}/>
         </CardActions>
     </Card>
 

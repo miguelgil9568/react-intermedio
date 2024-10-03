@@ -9,6 +9,8 @@ import { useAppSelector, useAppDispatch } from './hooks/store'
 import CrSpinner from './components/CrSpinner'
 import { useQuery } from '@tanstack/react-query'
 import { ApolloClient, HttpLink, InMemoryCache, gql, useLazyQuery } from '@apollo/client'
+import { useSnackbar } from 'notistack'
+import CrFilter from './components/CrFilter'
 
 
 const GET_PRODUCTS = gql `
@@ -61,6 +63,7 @@ const Home = () => {
   const [data, setData] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const { enqueueSnackbar } = useSnackbar();
 
 
   useEffect(()=>{
@@ -79,7 +82,7 @@ const Home = () => {
     dispatch(removeProduct(id));
   }
 
-  console.log(state.data);
+  console.log('evento agragado= ' + state.data);
   console.log('loading '+state.loading); 
 
 
@@ -91,7 +94,10 @@ const Home = () => {
   
     return (
       <>
+        
         {/* <Alert severity="success">This is a success Alert.</Alert> */}
+
+        {/* <CrFilter></CrFilter> */}
         <Box sx={{
           display: 'flex',
           marginTop: 4,
@@ -100,11 +106,11 @@ const Home = () => {
           paddingInline: '7%',
           justifyContent: 'center'
         }}>
-          {state.data.map((item: any) => (
+          {state !== null && state !== undefined ? state.data.map((item: any) => (
             <CrCard item={item} add={handleAdd} remove={handleRemove} ischeck={ carrito.carrito.filter(element => {
               return item.id === element.id;
             }).length > 0 ?  true : false} />
-          ))}
+          )): <CrSpinner isViewer={loading} ></CrSpinner>}
         </Box>
         
       </>

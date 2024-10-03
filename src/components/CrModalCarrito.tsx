@@ -13,6 +13,8 @@ import { useEffect, useState } from 'react';
 import { number } from 'yup';
 import { Button } from '@mui/base';
 import {  useHistory } from 'react-router-dom';
+import { addProduct, removeProduct } from '../store/redux/carrito/slice'
+import { useAppDispatch } from '../hooks/store';
 
 interface IProps {
     items : Product[];
@@ -22,43 +24,40 @@ export default function CrModalCarrito({items}:IProps) {
     const history = useHistory();
     let [isCheck,setValor] = useState(true);
     let [total,setTotal] = useState(0);
-    //const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
+
 
     useEffect (()=>{
         calcularTotal();
       }, items
     )
 
-    const handleCheck = () =>{
-        console.log('handleCheck');
-        if(!isCheck){
-          setValor(!isCheck);
-          //addProduct(item);
-        }else {
-          setValor(!isCheck);
-          //removeProduct(item.id);
-        }
-      }
+    const handleCheck = (item: Product) =>{
+        dispatch(addProduct(item));
+    }
 
+    const handleRemove = (id: number ) =>{
+      dispatch(removeProduct(id));
+    };
 
-      const calcularTotal = ( ) =>{
-        let precios : number[] = [];
-        items.forEach(valor => {
-          precios.push(valor.price);
-        })
-        setTotal( precios.reduce((accumulator, currentValue) =>{
-          return accumulator + currentValue;
-        }, 0) );   
-      }
+    const calcularTotal = ( ) =>{
+      let precios : number[] = [];
+      items.forEach(valor => {
+        precios.push(valor.price * valor.quantity!);
+      })
+      setTotal( precios.reduce((accumulator, currentValue) =>{
+        return accumulator + currentValue;
+      }, 0) );   
+    }
 
-      const irACarrito = () =>{
-        return history.push('/detalleCompra');
-      }
+    const irACarrito = () =>{
+      return history.push('/detalleCompra');
+    }
 
   return (
    <>
       {  items.length === 0 ? <h2 > Carrito vacio </h2> : items.map(item => (
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
               <ListItem alignItems="flex-start">
                   <ListItemAvatar>
                   <Avatar alt="Travis Howard" src={item.image} />
@@ -78,15 +77,20 @@ export default function CrModalCarrito({items}:IProps) {
                             <div>
                               {item.category}
                             </div>
-                            <div>
-                            { '$' +  item.price}
-                            </div>
                           </Typography>
+                            <div>
+                            {item.quantity} 
+                            { ' x  $' +  item.price}
+                            </div>
                       </React.Fragment>
                   }
                   
                   />
-                  <CrBtnAccion isCheck={true} isShow={false} setValor={handleCheck}></CrBtnAccion>
+                  <CrBtnAccion isCheck={true} isShow={false} setValor={() =>{
+                    console.log('handleCheck');
+                    setValor(!isCheck);
+                    handleRemove(item.id);
+                    }}></CrBtnAccion>
               </ListItem>
               <Divider variant="inset" component="li" />
           </List>
@@ -101,8 +105,6 @@ export default function CrModalCarrito({items}:IProps) {
             Ir al carrito
           </Button>
         </div>: ''}
-        
-
       </>
   );
 }

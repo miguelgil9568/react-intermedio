@@ -9,7 +9,7 @@ interface IProps{
 export default function CrSpinner({isViewer = false}: IProps) {
   return <>
             {isViewer ? (<Box sx={{ display: 'flex' }}>
-            <CircularProgress />
+                <CircularProgress />
             </Box>) : ''
             }
         </>

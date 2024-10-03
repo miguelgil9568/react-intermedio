@@ -2,6 +2,7 @@ import { IconButton } from '@mui/material'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import { useEffect } from 'react';
 
 interface IProps{
     isCheck: boolean,
@@ -10,7 +11,6 @@ interface IProps{
 } 
 
 const CrBtnAccion = ({isCheck,setValor, isShow}:IProps) => {
-    
 
   return (
     <div>

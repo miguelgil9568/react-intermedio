@@ -2,14 +2,24 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import { Link } from 'react-router-dom';
+import {
+  Unstable_NumberInput as BaseNumberInput,
+  NumberInputProps,
+} from '@mui/base/Unstable_NumberInput';
+import { StyledInputRoot } from '@mui/joy/Input/Input';
+import { blue, grey } from '@mui/material/colors';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
+import { Product } from '../types/Product';
+import { useState } from 'react';
 
 interface IProps {
-    item: any,
+    item: Product,
     open: boolean, 
     setValor : () => void,
     handleClose : () => void,
@@ -22,7 +32,127 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
+  let [quantity,setQuantity] = useState<number | null>(1);
+  
 
+  const NumberInput = React.forwardRef(function CustomNumberInput(
+    props: NumberInputProps,
+    ref: React.ForwardedRef<HTMLDivElement>,
+  ) {
+    return (
+      <BaseNumberInput
+        slots={{
+          root: StyledInputRoot,
+          input: StyledInput,
+          incrementButton: StyledButton,
+          decrementButton: StyledButton,
+        }}
+        slotProps={{
+          incrementButton: {
+            children: <AddIcon fontSize="small" />,
+            className: 'increment',
+          },
+          decrementButton: {
+            children: <RemoveIcon fontSize="small" />,
+          },
+        }}
+        {...props}
+        ref={ref}
+      />
+    );
+  });
+
+  const StyledInputRoot = styled('div')(
+    ({ theme }) => `
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[500]};
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+  `,
+  );
+  
+  const StyledInput = styled('input')(
+    ({ theme }) => `
+    font-size: 0.875rem;
+    font-family: inherit;
+    font-weight: 400;
+    line-height: 1.375;
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+    background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+    border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+    box-shadow: 0px 2px 4px ${
+      theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.5)' : 'rgba(0,0,0, 0.05)'
+    };
+    border-radius: 8px;
+    margin: 0 8px;
+    padding: 10px 12px;
+    outline: 0;
+    min-width: 0;
+    width: 4rem;
+    text-align: center;
+  
+    &:hover {
+      border-color: ${blue[400]};
+    }
+  
+    &:focus {
+      border-color: ${blue[400]};
+      box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[700] : blue[200]};
+    }
+  
+    &:focus-visible {
+      outline: 0;
+    }
+  `,
+  );
+  
+  const StyledButton = styled('button')(
+    ({ theme }) => `
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    line-height: 1.5;
+    border: 1px solid;
+    border-radius: 999px;
+    border-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
+    background: ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
+    color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
+    width: 32px;
+    height: 32px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 120ms;
+  
+    &:hover {
+      cursor: pointer;
+      background: ${theme.palette.mode === 'dark' ? blue[700] : blue[500]};
+      border-color: ${theme.palette.mode === 'dark' ? blue[500] : blue[400]};
+      color: ${grey[50]};
+    }
+  
+    &:focus-visible {
+      outline: 0;
+    }
+  
+    &.increment {
+      order: 1;
+    }
+  `,
+  );
+
+  const setValores= () => {
+    console.log("item "+item );
+    console.log("quantity "+ quantity );
+    item.quantity = quantity;
+    setValor();
+  }
 
   return (
     <React.Fragment>
@@ -64,20 +194,21 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
                 </ImageListItem>
              </ImageList> */}
             <CardContent orientation="horizontal">
+                {!isCheck ? <NumberInput min={1} defaultValue={1} value={quantity} onChange={(event, val) => setQuantity(val)} /> : ''}
                 <div>
-                <Typography level="body-xs">Precio Total:</Typography>
-                <Typography fontSize="lg" fontWeight="lg">
-                    ${item.price}
-                </Typography>
+                  <Typography level="body-xs">Precio por unidad:</Typography>
+                  <Typography fontSize="lg" fontWeight="lg">
+                      ${item.price}
+                  </Typography>
                 </div>
                 <Button
-                onClick={setValor}
+                onClick={setValores}
                 size="md"
                 color="primary"
                 aria-label="Explore Bahamas Islands"
                 sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
                 >
-                  <Link to="/">{ !isCheck ? 'Agregar al carrito' : 'Desagregar del carrito'}</Link>
+                  { !isCheck ? 'Agregar al carrito' : 'Desagregar del carrito'}
                 </Button>
             </CardContent>
         </Card>
