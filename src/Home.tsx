@@ -1,5 +1,4 @@
 import  { useEffect, useState } from 'react'
-import CrNavBar from './components/CrNavBar'
 import CrCard from './components/CrCard'
 import {  Box } from '@mui/material'
 import useServices from './services/useServices'
@@ -9,8 +8,6 @@ import { useAppSelector, useAppDispatch } from './hooks/store'
 import CrSpinner from './components/CrSpinner'
 import { useQuery } from '@tanstack/react-query'
 import { ApolloClient, HttpLink, InMemoryCache, gql, useLazyQuery } from '@apollo/client'
-import { useSnackbar } from 'notistack'
-import CrFilter from './components/CrFilter'
 
 
 const GET_PRODUCTS = gql `
@@ -22,6 +19,7 @@ const GET_PRODUCTS = gql `
       description
       category
       image
+      quantity
     }
   }
 `;
@@ -35,44 +33,49 @@ const client = new ApolloClient({
 
 client.query({
   query: GET_PRODUCTS
-}).then(result => console.log('graphql' + result));
+})  .then(result => console.log('graphql' + result));
 
 
 
 const Home = () => { 
 
-  const query = useQuery({
-       queryKey: ['keyproductos'],
-       queryFn: () => fetch('https://fakestoreapi.com/products').then(res => res.json())
-  });
+
+  // const query = useQuery({
+  //      queryKey: ['keyproductos'],
+  //      queryFn: () => fetch('https://fakestoreapi.com/products').then(res => res.json())
+  // });
 
   const carrito = useAppSelector((state) => state);
   console.log('carrito '+ carrito);
 
   const dispatch = useAppDispatch();
-
   const {
     // data, 
     // error, 
-    handleFetch,
-    handleFetchxId, 
+    // handleFetch,
+    handleFetchWithDiscount,
+    // handleFetchxId, 
     state
     // loading
   } = useServices();
 
-  const [data, setData] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const { enqueueSnackbar } = useSnackbar();
-
+  useEffect(()=>{
+    const  metodoasync = async () => {
+      await handleFetchWithDiscount();
+    }
+    metodoasync();
+    //handleFetchxId(1);
+  },[]);
 
   useEffect(()=>{
-    setLoading(true);
-    handleFetch();
-    setData(state.data);
-    setLoading(state.loading);
+    console.log(' cambio en el carrito' ); 
+    const  metodoasync = async () => {
+      await handleFetchWithDiscount();
+     
+    }
+    metodoasync();
     //handleFetchxId(1);
-  },[])
+  },[carrito.carrito]);
 
   const handleAdd = (item: Product ) =>{
     dispatch(addProduct(item));
@@ -80,42 +83,35 @@ const Home = () => {
 
   const handleRemove = (id: number ) =>{
     dispatch(removeProduct(id));
+    state.data.forEach((element: Product) => {
+      if (element.id === id){
+        element.quantity = 0;
+      }
+    });
   }
 
-  console.log('evento agragado= ' + state.data);
-  console.log('loading '+state.loading); 
-
-
-  if(loading){
-    return ( 
-            <CrSpinner isViewer={loading} ></CrSpinner>
-    )
+  const validarCheck = (item: Product) : boolean => {
+    return state.data.filter(element => {
+      return item.id === element.id && element.quantity == 0;
+    }).length > 0 ?  true : false ;
   }
-  
-    return (
-      <>
-        
-        {/* <Alert severity="success">This is a success Alert.</Alert> */}
 
-        {/* <CrFilter></CrFilter> */}
-        <Box sx={{
-          display: 'flex',
-          marginTop: 4,
-          gap: 0,
-          flexWrap: 'wrap',
-          paddingInline: '7%',
-          justifyContent: 'center'
-        }}>
-          {state !== null && state !== undefined ? state.data.map((item: any) => (
-            <CrCard item={item} add={handleAdd} remove={handleRemove} ischeck={ carrito.carrito.filter(element => {
-              return item.id === element.id;
-            }).length > 0 ?  true : false} />
-          )): <CrSpinner isViewer={loading} ></CrSpinner>}
-        </Box>
-        
-      </>
-    )
-  // }
+  return (
+    <>
+      <Box sx={{
+        display: 'flex',
+        marginTop: 4,
+        gap: 0,
+        flexWrap: 'wrap',
+        paddingInline: '7%',
+        justifyContent: 'center'
+      }}>
+        {!state.loading && state.data !== null  ? state.data.map((item: Product) => (
+          <CrCard item={item} add={handleAdd} remove={handleRemove} ischeck={validarCheck(item)} />
+        )): <CrSpinner ></CrSpinner>}
+      </Box>
+    </> 
+  )
   
 } 
 

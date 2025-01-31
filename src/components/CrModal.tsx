@@ -17,6 +17,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { Product } from '../types/Product';
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/store';
+import { addProduct, updateProduct } from '../store/redux/carrito/slice';
 
 interface IProps {
     item: Product,
@@ -32,7 +34,13 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  let [quantity,setQuantity] = useState<number | null>(1);
+
+  const carrito = useAppSelector((state) => state);
+  console.log('carrito '+ carrito);
+
+  const dispatch = useAppDispatch();
+
+  let [quantity,setQuantity] = useState<number>(1);
   
 
   const NumberInput = React.forwardRef(function CustomNumberInput(
@@ -148,9 +156,10 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
   );
 
   const setValores= () => {
-    console.log("item "+item );
+    console.log("item "+JSON.stringify(item) );
     console.log("quantity "+ quantity );
-    item.quantity = quantity;
+    dispatch(addProduct(item));
+    isCheck ? setQuantity(1) : setQuantity(quantity);
     setValor();
   }
 
@@ -203,7 +212,8 @@ export default function CrModal( {item, open,setValor,  handleClickOpen, handleC
                 </div>
                 <Button
                 onClick={setValores}
-                size="md"
+                size="medium"
+                variant="contained"
                 color="primary"
                 aria-label="Explore Bahamas Islands"
                 sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}

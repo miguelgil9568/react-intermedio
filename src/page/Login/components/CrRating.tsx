@@ -48,10 +48,17 @@ function IconContainer(props: IconContainerProps) {
 
 interface IProps{
     isCarita: boolean,
-    value: number
+    valor: number
 }
 
-export default function CrRating({isCarita, value}:IProps) {
+export default function CrRating({isCarita, valor}:IProps) {
+
+  const [value, setValue] = React.useState<number | null>(valor);
+
+  const calcularPorcentaje = (value : number) : number  =>{
+    return value;
+  }
+
   return <>
     {isCarita ? 
     (<StyledRating
@@ -60,7 +67,10 @@ export default function CrRating({isCarita, value}:IProps) {
       IconContainerComponent={IconContainer}
       getLabelText={(value: number) => customIcons[value].label}
       highlightSelectedOnly
-    />): (<Rating name="size-large" defaultValue={value} precision={0.5} size="large" />
+    />): (<Rating name="read-only" onChange={(event, newValue) => {
+           setValue(newValue);
+        }}  value={(value ? value : 0)}
+        precision={0.05} size="large"  readOnly/>
     )}
   </>
 }

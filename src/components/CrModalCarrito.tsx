@@ -15,6 +15,7 @@ import { Button } from '@mui/base';
 import {  useHistory } from 'react-router-dom';
 import { addProduct, removeProduct } from '../store/redux/carrito/slice'
 import { useAppDispatch } from '../hooks/store';
+import useServices from '../services/useServices'
 
 interface IProps {
     items : Product[];
@@ -25,11 +26,20 @@ export default function CrModalCarrito({items}:IProps) {
     let [isCheck,setValor] = useState(true);
     let [total,setTotal] = useState(0);
     const dispatch = useAppDispatch();
-
+    
+    const {
+      // data, 
+      // error, 
+      // handleFetch,
+      handleFetchWithDiscount,
+      // handleFetchxId, 
+      state
+      // loading
+    } = useServices();
 
     useEffect (()=>{
         calcularTotal();
-      }, items
+      }, [items]
     )
 
     const handleCheck = (item: Product) =>{

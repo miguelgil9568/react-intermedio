@@ -5,7 +5,8 @@
     description: string;
     category:    string;
     image:       string;
-    quantity:    number | null;
+    quantity:    number ;
+    discount:    number;  
     rating:      Rating;
   }
   

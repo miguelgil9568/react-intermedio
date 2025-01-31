@@ -48,7 +48,7 @@ export default function CrCard({item, add, remove,ischeck }: IProps) {
     <>
     <Card sx={{ maxWidth: 350 , width: 300 , margin: '15px', justifyContent: 'center'}} > 
         <Stack spacing={2} m={2}>
-        <CrChip></CrChip>
+        <CrChip valor={item.discount}></CrChip>
         </Stack>
         <CardMedia onClick={handleClickOpen} 
             sx={{ height: 200  }}
@@ -73,12 +73,10 @@ export default function CrCard({item, add, remove,ischeck }: IProps) {
             justifyContent: 'space-between'
         }}>
             <Box sx={{margin: '10px'}}>
-                <CrRating  isCarita={false} value={item.rating.rate}></CrRating>
+                <CrRating  isCarita={false} valor={item.rating.rate}></CrRating>
             </Box>
             {/* <CrBtnAccion isCheck={open} setValor={handleClickOpen} isShow={true}/> */}
-            <CrBtnAccion isCheck={isCheck} setValor={()=> {
-              
-              item.quantity = 1;handleCheck; }} isShow={false}/>
+            <CrBtnAccion isCheck={isCheck} setValor={handleCheck} isShow={false}/>
         </CardActions>
     </Card>
 

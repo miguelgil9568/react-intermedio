@@ -6,7 +6,7 @@ const DEFAULTState: Product[] = [];
 
 const initialState: Product[] = (()=>{
     const persistencia = localStorage.getItem("_redux_state_");
-    console.log(persistencia);
+    console.log('persistencia ' + persistencia);
     return persistencia ? JSON.parse(persistencia).carrito : DEFAULTState;
 })();
 
@@ -25,7 +25,7 @@ export const useCarritoSlice = createSlice({
               });
         },
         removeProduct: (state, action: PayloadAction<number>) => {
-            enqueueSnackbar("Producto desagregado del carrito", {
+            enqueueSnackbar("El producto fue removido del carrito", {
                 variant: "error",
                 anchorOrigin: {
                   vertical: "bottom",
@@ -33,9 +33,18 @@ export const useCarritoSlice = createSlice({
                 },
               });
             return state.filter((product) => product.id !== action.payload);
+        },updateProduct: (state, action: PayloadAction<any>) => {
+          enqueueSnackbar("Producto agregado correctamente al carrito", {
+              variant: "error",
+              anchorOrigin: {
+                vertical: "bottom",
+                horizontal: "center",
+              },
+            });
+          return state.forEach((product) => product.id !== action.payload.product.id ? product : product.quantity = action.payload.quantity );
         }
     }
 });
 
-export const {addProduct, removeProduct} = useCarritoSlice.actions;
+export const {addProduct, removeProduct, updateProduct} = useCarritoSlice.actions;
 export default useCarritoSlice.reducer;
